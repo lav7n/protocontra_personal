@@ -2,7 +2,7 @@ import argparse
 import os
 import shutil
 import time
-from trainers import SourceDomainTrainer,PFA_trainer,CL_trainer
+from trainers import SourceDomainTrainer,PFA_Trainer,CL_Trainer
 import json
 import glob
 import itertools

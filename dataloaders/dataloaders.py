@@ -171,7 +171,7 @@ class MyBatchSampler(data.Sampler):
 
 
 if __name__ == '__main__':
-    data_root = '/mnt/sda/qinji/Domain_Adaptation/data/Abdomen_Data/'
+    data_root = '/kaggle/input/protocontra-dataset'
     sites = ['CT']
     # dataset = PatientDataset(data_root,sites,'abdomen','test',True,16)
     # patient_sampler = MyBatchSampler(dataset,16,False)

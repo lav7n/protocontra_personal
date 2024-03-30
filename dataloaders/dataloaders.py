@@ -176,7 +176,7 @@ if __name__ == '__main__':
     # dataset = PatientDataset(data_root,sites,'abdomen','test',True,16)
     # patient_sampler = MyBatchSampler(dataset,16,False)
     # dataloader = data.DataLoader(dataset,batch_size=1,batch_sampler=patient_sampler,num_workers=8)
-    dataset = MyDataset(data_root,sites,'abdomen','train',True,weak_strong_aug=True)
+    dataset = MyDataset(data_root,sites,'abdomen','Train',True,weak_strong_aug=True)
     dataloader = data.DataLoader(dataset,batch_size=8,num_workers=4)
     # for images,segs,names in dataloader:
     #     print(images.shape,segs.shape,names)

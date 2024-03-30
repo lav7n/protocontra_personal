@@ -24,7 +24,7 @@ class MyDataset(data.Dataset):
             self.augmenter = get_transform(self.phase,New_size=(256,256))
         for site in sites:
             if split_train:
-                data_dir = os.path.join(self.rootdir,site,'train')
+                data_dir = os.path.join(self.rootdir,site,'Train')
             else:
                 data_dir = os.path.join(self.rootdir,site,'test')
             for data_name in os.listdir(data_dir):

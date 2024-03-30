@@ -27,6 +27,7 @@ class MyDataset(data.Dataset):
                 data_dir = os.path.join(self.rootdir,site,'Train')
             else:
                 data_dir = os.path.join(self.rootdir,site,'test')
+            print(os.listdir(data_dir))
             for data_name in os.listdir(data_dir):
                 self.name_list.append(data_name[:-4])
                 self.all_data_path.append(os.path.join(data_dir,data_name))

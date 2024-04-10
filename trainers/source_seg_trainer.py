@@ -2,7 +2,7 @@ import torch
 import os,random
 from models import get_model
 
-#   from dataloaders import MyDataset
+#   from dataloaders import AbdominalDataset
 from torch.utils.data import DataLoader
 from losses import MultiClassDiceLoss,PixelPrototypeCELoss
 
@@ -81,7 +81,7 @@ class SourceDomainTrainer():
         ### initialize dataloaders
         self.transforms = get_transform(applied_types="train", new_size=(256,256))
         self.train_dataloader = DataLoader(
-            MyDataset(self.opt['data_root'], mode='CT_npy', transforms=self.transforms),
+            AbdominalDataset(self.opt['data_root'], mode='CT_npy', transforms=self.transforms),
             batch_size=self.opt['batch_size'],
             shuffle=True,
             drop_last=True,
@@ -91,7 +91,7 @@ class SourceDomainTrainer():
         print('Length of training dataset: ', len(self.train_dataloader))
 
         self.val_dataloader = DataLoader(
-            MyDataset(self.opt['data_root'], mode='CT_npy', transforms=self.transforms),
+            AbdominalDataset(self.opt['data_root'], mode='CT_npy', transforms=self.transforms),
             batch_size=self.opt['batch_size'],
             shuffle=True,
             drop_last=True,

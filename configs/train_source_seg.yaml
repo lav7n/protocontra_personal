@@ -1,7 +1,7 @@
 # Experiment Specific
 experiment_name: 'UNet_Abdomen_CT_Seg'
-data_root: '/kaggle/input/protocontra-dataset/CT'
-save_root: '/kaggle/working/'
+data_root: '/content/Dataset/abdominalDATA'
+save_root: '/content/'
 source_sites:
 - 'CT'
 resume_dir: ''

@@ -91,11 +91,11 @@ class SourceDomainTrainer():
         print('Length of training dataset: ', len(self.train_dataloader))
 
         self.val_dataloader = DataLoader(
-            MyDataset(self.opt['data_root'], self.opt['source_sites'], phase='val', split_train=False),
+            MyDataset(self.opt['data_root'], mode='CT_npy', transforms=self.transforms),
             batch_size=self.opt['batch_size'],
-            shuffle=False,
-            drop_last=False,
-            num_workers=4
+            shuffle=True,
+            drop_last=True,
+            num_workers=self.opt['num_workers']
         )
 
         print('Length of validation dataset: ', len(self.val_dataloader))

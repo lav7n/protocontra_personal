@@ -81,7 +81,7 @@ class SourceDomainTrainer():
         ### initialize dataloaders
         self.transforms = get_transform(applied_types="train", new_size=(256,256))
         self.train_dataloader = DataLoader(
-            AbdominalDataset(self.opt['data_root'], mode='CT_npy', transforms=self.transforms),
+            AbdominalDataset(self.opt['data_root'], mode='CT_npy', transform=self.transforms),
             batch_size=self.opt['batch_size'],
             shuffle=True,
             drop_last=True,

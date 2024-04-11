@@ -25,7 +25,7 @@ num_workers: 1
 arch: 'UNet'
 use_prototype: False
 update_prototype: False
-input_dim: 3
+input_dim: 1
 feat_dim: 32
 output_dim: 64
 num_classes: 5

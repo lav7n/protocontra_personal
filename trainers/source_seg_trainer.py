@@ -91,7 +91,7 @@ class SourceDomainTrainer():
         print('Length of training dataset: ', len(self.train_dataloader))
 
         self.val_dataloader = DataLoader(
-            AbdominalDataset(self.opt['data_root'], mode='CT_npy', transforms=self.transforms),
+            AbdominalDataset(self.opt['data_root'], mode='CT_npy', transform=self.transforms),
             batch_size=self.opt['batch_size'],
             shuffle=True,
             drop_last=True,
@@ -225,7 +225,7 @@ class SourceDomainTrainer():
         for epoch in range(self.start_epoch,self.total_epochs):
             train_iterator = tqdm((self.train_dataloader), total = len(self.train_dataloader))
             train_losses = {}
-            for it, (images,segs,_) in enumerate(train_iterator):
+            for it, (images,segs) in enumerate(train_iterator):
                 # pdb.set_trace()
                 images = images.to(self.opt['gpu_id'])
                 segs = segs.to(self.opt['gpu_id'])

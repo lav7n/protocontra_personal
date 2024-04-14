@@ -39,9 +39,9 @@ class SourceDomainTrainer():
 
         print('Length of training dataset: ', len(self.train_dataloader))
 
-        # for images, segs in self.train_dataloader:
-        #   print("Images shape:", images.shape)
-        #   print("Segs shape:", segs.shape)
+        for images, segs in self.train_dataloader:
+          print("Images shape:", images.shape)
+          print("Segs shape:", segs.shape)
 
         self.val_dataloader = DataLoader(
             AbdominalDataset(self.opt['data_root'], mode='CT_npy', transform=self.transforms),
@@ -195,7 +195,7 @@ class SourceDomainTrainer():
                         
                         if isinstance(predicts, dict):
                             predicts = predicts['seg']
-                        visuals = {'images':images[:,1].detach().cpu().numpy(),'preds':torch.argmax(predicts,dim=1).detach().cpu().numpy(),
+                        visuals = {'images':images[:,0].detach().cpu().numpy(),'preds':torch.argmax(predicts,dim=1).detach().cpu().numpy(),
                                    'gt_segs':segs.detach().cpu().numpy()}
                         self.visualizer.display_current_results(self.iter_counter.steps_so_far,visuals)
                         self.visualizer.plot_current_losses(self.iter_counter.steps_so_far, losses)
@@ -208,7 +208,7 @@ class SourceDomainTrainer():
                 val_metrics = {}
                 sample_dict = {}
                 val_iterator = tqdm((self.val_dataloader), total = len(self.val_dataloader))
-                for it, (val_imgs, val_segs, val_names) in enumerate(val_iterator):
+                for it, (val_imgs, val_segs) in enumerate(val_iterator):
 
                     val_imgs = val_imgs.to(self.opt['gpu_id'])
                     val_segs = val_segs.to(self.opt['gpu_id'])
@@ -222,28 +222,28 @@ class SourceDomainTrainer():
                     val_iterator.set_description(f'Eval Epoch [{epoch}/{self.total_epochs}]')
                     val_iterator.set_postfix(ce_loss = val_losses['val_ce'].item()/(it+1), dc_loss = val_losses['val_dc'].item()/(it+1))
 
-                    for i,name in enumerate(val_names):
+                    # for i,name in enumerate(val_names):
 
-                        sample_name,index = name.split('_')[0],int(name.split('_')[1])
-                        sample_dict[sample_name] = sample_dict.get(sample_name,[]) + [(predict[i].detach().cpu(),val_segs[i].detach().cpu(),index)]
+                    #     sample_name,index = name.split('_')[0],int(name.split('_')[1])
+                    #     sample_dict[sample_name] = sample_dict.get(sample_name,[]) + [(predict[i].detach().cpu(),val_segs[i].detach().cpu(),index)]
                         
                 for k, v in val_losses.items():
                     val_losses[k] = v/(len(self.val_dataloader)+1)   
                     
                 pred_results_list = []
                 gt_segs_list = []
-                for k in sample_dict.keys():
+                # for k in sample_dict.keys():
 
-                    sample_dict[k].sort(key=lambda ele: ele[2])
-                    preds = []
-                    targets = []
-                    for pred,target,_ in sample_dict[k]:
-                        if target.sum()==0:
-                            continue
-                        preds.append(pred)
-                        targets.append(target)
-                    pred_results_list.append(torch.stack(preds,dim=-1))
-                    gt_segs_list.append(torch.stack(targets,dim=-1))
+                #     sample_dict[k].sort(key=lambda ele: ele[2])
+                #     preds = []
+                #     targets = []
+                #     for pred,target,_ in sample_dict[k]:
+                #         if target.sum()==0:
+                #             continue
+                #         preds.append(pred)
+                #         targets.append(target)
+                #     pred_results_list.append(torch.stack(preds,dim=-1))
+                #     gt_segs_list.append(torch.stack(targets,dim=-1))
                         
 
                 # pdb.set_trace()

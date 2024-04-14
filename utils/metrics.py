@@ -124,7 +124,7 @@ def mean_dice(results, gt_seg_maps,num_classes,organ_list):
         dice_coef = MultiDiceScore(results[i],gt_seg_maps[i],num_classes)
         total_dice_mat.append(dice_coef)
     total_dice_mat = np.array(total_dice_mat)
-    # for j,organ in enumerate(organ_list):
-    #     dice_metric['{:}_dice'.format(organ)] = total_dice_mat[:,j].mean()
+    for j,organ in enumerate(organ_list):
+        dice_metric['{:}_dice'.format(organ)] = total_dice_mat[:,j].mean()
     dice_metric['dice_avg'] = total_dice_mat.mean()
     return dice_metric

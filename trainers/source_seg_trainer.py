@@ -39,9 +39,9 @@ class SourceDomainTrainer():
 
         print('Length of training dataset: ', len(self.train_dataloader))
 
-        for images, segs in self.train_dataloader:
-          print("Images shape:", images.shape)
-          print("Segs shape:", segs.shape)
+        # for images, segs in self.train_dataloader:
+        #   print("Images shape:", images.shape)
+        #   print("Segs shape:", segs.shape)
 
         self.val_dataloader = DataLoader(
             AbdominalDataset(self.opt['data_root'], mode='CT_npy', transform=self.transforms),
